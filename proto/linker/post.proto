@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package post;
+option go_package = "sleeps.linker.post.v1;linker_post_v1";
+
+message Request {
+  string username = 1;
+  string url = 2;
+  optional string alias = 3;
+}
+
+enum Status {
+  OK = 0;
+  Error = 1;
+}
+
+message Response {
+  Status status = 1;
+  optional string error = 2;
+  optional string alias = 3;
+}
+

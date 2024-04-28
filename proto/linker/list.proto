@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package list;
+option go_package = "sleeps.linker.list.v1;linker_list_v1";
+
+message Request {
+  string username = 1;
+}
+
+message Response {
+  repeated string links = 1;
+}

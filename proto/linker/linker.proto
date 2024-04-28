@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package linker;
+
+option go_package = "sleeps.linker.v1;linker_v1";
+
+import "linker/post.proto";
+import "linker/pick.proto";
+import "linker/list.proto";
+
+service Linker {
+  rpc Post (post.Request) returns (post.Response);
+  rpc Pick (pick.Request) returns (pick.Response);
+  rpc List (list.Request) returns (list.Response);
+}
+
