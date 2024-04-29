@@ -22,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LinkerClient interface {
-	Post(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	Pick(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	List(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostResponse, error)
+	Pick(ctx context.Context, in *PickRequest, opts ...grpc.CallOption) (*PickResponse, error)
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 }
 
 type linkerClient struct {
@@ -35,8 +35,8 @@ func NewLinkerClient(cc grpc.ClientConnInterface) LinkerClient {
 	return &linkerClient{cc}
 }
 
-func (c *linkerClient) Post(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *linkerClient) Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostResponse, error) {
+	out := new(PostResponse)
 	err := c.cc.Invoke(ctx, "/linker.Linker/Post", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -44,8 +44,8 @@ func (c *linkerClient) Post(ctx context.Context, in *Request, opts ...grpc.CallO
 	return out, nil
 }
 
-func (c *linkerClient) Pick(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *linkerClient) Pick(ctx context.Context, in *PickRequest, opts ...grpc.CallOption) (*PickResponse, error) {
+	out := new(PickResponse)
 	err := c.cc.Invoke(ctx, "/linker.Linker/Pick", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (c *linkerClient) Pick(ctx context.Context, in *Request, opts ...grpc.CallO
 	return out, nil
 }
 
-func (c *linkerClient) List(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *linkerClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+	out := new(ListResponse)
 	err := c.cc.Invoke(ctx, "/linker.Linker/List", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +66,9 @@ func (c *linkerClient) List(ctx context.Context, in *Request, opts ...grpc.CallO
 // All implementations must embed UnimplementedLinkerServer
 // for forward compatibility
 type LinkerServer interface {
-	Post(context.Context, *Request) (*Response, error)
-	Pick(context.Context, *Request) (*Response, error)
-	List(context.Context, *Request) (*Response, error)
+	Post(context.Context, *PostRequest) (*PostResponse, error)
+	Pick(context.Context, *PickRequest) (*PickResponse, error)
+	List(context.Context, *ListRequest) (*ListResponse, error)
 	mustEmbedUnimplementedLinkerServer()
 }
 
@@ -76,13 +76,13 @@ type LinkerServer interface {
 type UnimplementedLinkerServer struct {
 }
 
-func (UnimplementedLinkerServer) Post(context.Context, *Request) (*Response, error) {
+func (UnimplementedLinkerServer) Post(context.Context, *PostRequest) (*PostResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
 }
-func (UnimplementedLinkerServer) Pick(context.Context, *Request) (*Response, error) {
+func (UnimplementedLinkerServer) Pick(context.Context, *PickRequest) (*PickResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pick not implemented")
 }
-func (UnimplementedLinkerServer) List(context.Context, *Request) (*Response, error) {
+func (UnimplementedLinkerServer) List(context.Context, *ListRequest) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedLinkerServer) mustEmbedUnimplementedLinkerServer() {}
@@ -99,7 +99,7 @@ func RegisterLinkerServer(s grpc.ServiceRegistrar, srv LinkerServer) {
 }
 
 func _Linker_Post_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+	in := new(PostRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -111,13 +111,13 @@ func _Linker_Post_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: "/linker.Linker/Post",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LinkerServer).Post(ctx, req.(*Request))
+		return srv.(LinkerServer).Post(ctx, req.(*PostRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Linker_Pick_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+	in := new(PickRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -129,13 +129,13 @@ func _Linker_Pick_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: "/linker.Linker/Pick",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LinkerServer).Pick(ctx, req.(*Request))
+		return srv.(LinkerServer).Pick(ctx, req.(*PickRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Linker_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+	in := new(ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func _Linker_List_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: "/linker.Linker/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LinkerServer).List(ctx, req.(*Request))
+		return srv.(LinkerServer).List(ctx, req.(*ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
