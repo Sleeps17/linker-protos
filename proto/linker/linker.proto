@@ -8,6 +8,7 @@ service Linker {
   rpc Post (PostRequest) returns (PostResponse);
   rpc Pick (PickRequest) returns (PickResponse);
   rpc List (ListRequest) returns (ListResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
 }
 
 enum Status {
@@ -45,4 +46,14 @@ message ListRequest {
 
 message ListResponse {
   repeated string links = 1;
+}
+
+message DeleteRequest {
+  string username = 1;
+  string alias = 2;
+}
+
+message DeleteResponse {
+  Status status = 1;
+  optional string error = 2;
 }
