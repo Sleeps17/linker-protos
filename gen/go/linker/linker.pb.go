@@ -10,9 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sleeps_linker_list_v1 "sleeps.linker.list.v1"
-	sleeps_linker_pick_v1 "sleeps.linker.pick.v1"
-	sleeps_linker_post_v1 "sleeps.linker.post.v1"
 )
 
 const (
@@ -44,12 +41,12 @@ var file_linker_linker_proto_rawDesc = []byte{
 }
 
 var file_linker_linker_proto_goTypes = []interface{}{
-	(*sleeps_linker_post_v1.Request)(nil),  // 0: post.Request
-	(*sleeps_linker_pick_v1.Request)(nil),  // 1: pick.Request
-	(*sleeps_linker_list_v1.Request)(nil),  // 2: list.Request
-	(*sleeps_linker_post_v1.Response)(nil), // 3: post.Response
-	(*sleeps_linker_pick_v1.Response)(nil), // 4: pick.Response
-	(*sleeps_linker_list_v1.Response)(nil), // 5: list.Response
+	(*Request)(nil),  // 0: post.Request
+	(*Request)(nil),  // 1: pick.Request
+	(*Request)(nil),  // 2: list.Request
+	(*Response)(nil), // 3: post.Response
+	(*Response)(nil), // 4: pick.Response
+	(*Response)(nil), // 5: list.Response
 }
 var file_linker_linker_proto_depIdxs = []int32{
 	0, // 0: linker.Linker.Post:input_type -> post.Request
@@ -70,6 +67,9 @@ func file_linker_linker_proto_init() {
 	if File_linker_linker_proto != nil {
 		return
 	}
+	file_linker_post_proto_init()
+	file_linker_pick_proto_init()
+	file_linker_list_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package pick;
-option go_package = "sleeps.linker.pick.v1;linker_pick_v1";
+option go_package = "sleeps.linker.v1;linker_v1";
 
 message Request {
   string username = 1;
