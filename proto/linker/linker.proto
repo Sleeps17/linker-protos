@@ -13,7 +13,7 @@ service Linker {
 
 message PostRequest {
   string username = 1;
-  string url = 2;
+  string link = 2;
   string alias = 3;
 }
 
@@ -28,7 +28,7 @@ message PickRequest {
 }
 
 message PickResponse {
-  string url = 1;
+  string link = 1;
 }
 
 message ListRequest {
