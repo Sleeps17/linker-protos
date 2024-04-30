@@ -11,11 +11,6 @@ service Linker {
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 }
 
-enum Status {
-  OK = 0;
-  Error = 1;
-}
-
 message PostRequest {
   string username = 1;
   string url = 2;
@@ -23,9 +18,7 @@ message PostRequest {
 }
 
 message PostResponse {
-  Status status = 1;
-  optional string error = 2;
-  optional string alias = 3;
+  string alias = 1;
 }
 
 
@@ -35,9 +28,7 @@ message PickRequest {
 }
 
 message PickResponse {
-  Status status = 1;
-  optional string error = 2;
-  optional string url = 3;
+  string url = 1;
 }
 
 message ListRequest {
@@ -54,6 +45,5 @@ message DeleteRequest {
 }
 
 message DeleteResponse {
-  Status status = 1;
-  optional string error = 2;
+  string alias = 1;
 }
