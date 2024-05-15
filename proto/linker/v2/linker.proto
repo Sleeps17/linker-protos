@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package linker;
+
+option go_package = "sleeps.linker.v2;linker_v2";
+
+service Linker {
+  rpc PostTopic (PostTopicRequest) returns (PostTopicResponse);
+  rpc DeleteTopic (DeleteTopicRequest) returns (DeleteTopicResponse);
+  rpc ListTopics (ListTopicsRequest) returns (ListTopicsResponse);
+
+  rpc PostLink (PostLinkRequest) returns (PostLinkResponse);
+  rpc PickLink (PickLinkRequest) returns (PickLinkResponse);
+  rpc DeleteLink (DeleteLinkRequest) returns (DeleteLinkResponse);
+  rpc ListLinks (ListLinksRequest) returns (ListLinksResponse);
+}
+
+message PostTopicRequest {
+  string username = 1;
+  string topic = 2;
+}
+
+message PostTopicResponse {
+  uint32 topic_id = 1;
+}
+
+message DeleteTopicRequest {
+  string username = 1;
+  string topic = 2;
+}
+
+message DeleteTopicResponse {
+  uint32 topic_id = 1;
+}
+
+message ListTopicsRequest {
+  string username = 1;
+}
+
+message ListTopicsResponse {
+  repeated string topics = 1;
+}
+
+message PostLinkRequest {
+  string username = 1;
+  string topic = 2;
+  string link = 3;
+  string alias = 4;
+}
+
+message PostLinkResponse {
+  string alias = 1;
+}
+
+message PickLinkRequest {
+  string username = 1;
+  string topic = 2;
+  string alias = 3;
+}
+
+message PickLinkResponse {
+  string link = 1;
+}
+
+message DeleteLinkRequest {
+  string username = 1;
+  string topic = 2;
+  string alias = 3;
+}
+
+message DeleteLinkResponse {
+  string alias = 1;
+}
+
+message ListLinksRequest {
+  string username = 1;
+  string topic = 2;
+}
+
+message ListLinksResponse {
+  repeated string links = 1;
+  repeated string aliases = 2;
+}

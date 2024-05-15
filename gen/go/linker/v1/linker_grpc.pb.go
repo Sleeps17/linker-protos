@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.18.0
-// source: linker/linker.proto
+// source: linker/v1/linker.proto
 
 package linker_v1
 
@@ -209,5 +209,5 @@ var Linker_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "linker/linker.proto",
+	Metadata: "linker/v1/linker.proto",
 }
